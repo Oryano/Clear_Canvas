@@ -133,14 +133,16 @@ var addNewObj = function(){
 
     items.push(currentJSON);
     console.log(items);
+    backToGrid();//go to grid page
+
 }
 
 //below function not complete:
 //needs to send back to grid page with no addition
-var cancelNew = function(){
+// var cancelNew = function(){
     
-    console.log("send back to grid page");
-}
+//     console.log("send back to grid page");
+// }
 
 ///////////////////////////////////////////////////////////////
 //////      until here JS that belongs to new_object      /////
@@ -165,7 +167,15 @@ $(document).ready(function(){
 var backToGrid = function(){
     $("#menuPage").hide(); //hide menu
     $("#main_page").show(); //show main page
-    doGrid(17,14);
+
+    $("#new_page").hide(); //hide menu
+}
+
+var goToMenu = function(){
+    $("#new_age").hide(); //hide menu
+    $("#main_page").hide(); //show main page
+    $("#menuPage").show(); //hide menu
+
 }
 
 // to reveal new_object page when clicked (hide others)

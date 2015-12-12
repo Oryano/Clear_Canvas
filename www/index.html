@@ -19,7 +19,6 @@
     specific language governing permissions and limitations
     under the License.
 -->
-
 <html>
     <head>
         <meta charset="utf-8" />
@@ -31,150 +30,222 @@
         <!-- Bootstrap -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>New Object</title>
+        <title>Menu</title>
     </head>
 
 
 
     <body>
 
-        <div id="main_page"><h1>This is the main page</h1>
-        
 
-         <table id="gridd" class="table table-striped table-bordered table-condensed" style="">
-
-          <tbody>
-
-          </tbody>
-          </table>
-        
+        <div id="main_page">
+             <div class "container-fluid">        
+                <div id="upperDiv" class="row">
+                  <div class="col-xs-3 text-left topButtons" onClick="backToGrid()">Back</div>
+                  <div class="col-xs-6 text-center pageTitle">[Project name]</div>
+                  <div class="col-xs-3 text-right topButtons" onclick="goToMenu()">Menu</div>
+                </div>
 
 
-        </div>
+                <div>
 
-        <div class "container-fluid">        
-            <div id="upperDiv" class="row">
-              <div class="col-xs-3 text-left topButtons" onClick="cancelNew()">Cancel</div>
-              <div class="col-xs-6 text-center pageTitle">New Object</div>
-              <div class="col-xs-3 text-right topButtons"onClick="addNewObj()">Add</div>
+                    <table id="gridd" class="table table-striped table-bordered table-condensed" style="">
+
+                      <tbody>
+
+                      </tbody>
+                    </table>
+
+
+
+                </div>
+                </div>
             </div>
         </div>
-        <br>
-        <br>
-        <br>      
-        <br>
-       
 
-
-
-        <div class='container'>
-            <div class="center-block">
-                <div id="readBtn" class="btn btn-default btn-block">Read all
+            
+<!--             starting the new page stuff:
+ -->
+<div id = "new_page">
+    <div class "container-fluid">        
+                <div id="upperDiv" class="row">
+                  <div class="col-xs-3 text-left topButtons" onClick="backToGrid()">Cancel</div>
+                  <div class="col-xs-6 text-center pageTitle">New Object</div>
+                  <div class="col-xs-3 text-right topButtons"onClick="addNewObj()">Add</div>
                 </div>
             </div>
             <br>
             <br>
-            <table class="table">
-                <tbody>
-                    <tr id="readRow" >
-                        
-                    </tr>
-                    <tr>
-                        <td colspan="2"><input id="name" class="form-control" type="text" name="title" placeholder="Name your table"></td> 
-                    </tr>
-                    <tr>
-                        <td>Choose Shape</td>
+            <br>      
+            <br>
+           
+
+
+
+            <div class='container'>
+                <div class="center-block">
+                    <div id="readBtn" class="btn btn-default btn-block">Read all
+                    </div>
+                </div>
+                <br>
+                <br>
+                <table class="table">
+                    <tbody>
+                        <tr id="readRow" >
+                            
+                        </tr>
+                        <tr>
+                            <td colspan="2"><input id="name" class="form-control" type="text" name="title" placeholder="Name your table"></td> 
+                        </tr>
+                        <tr>
+                            <td>Choose Shape</td>
+                                <td>
+                                <select id="shape" class="form-control">
+                                <option value="square">square</option>
+                                <option value="circle">circle</option>
+                                </select>
+                            </td> 
+                        </tr>
+
+                        <tr>
                             <td>
-                            <select id="shape" class="form-control">
-                            <option value="square">square</option>
-                            <option value="circle">circle</option>
-                            </select>
-                        </td> 
-                    </tr>
-
-                    <tr>
-                        <td>
-                            Size
-                        </td>
-                        <td>
-                            <select class="form-control" id="size">
-                            <option value="small">Small</option>
-                            <option value="medium">Medium</option>
-                            <option value="large">Large</option>
-                            </select>
-                        </td> 
-                    </tr>
-                    <tr>
-                        <td>Color</td>
-                        <td>
-                            <select id="color" class="form-control">
-                            <option value="blue">blue</option>
-                            <option value="green">green</option>
-                            <option value="red">red</option>
-                            </select>
-                        </td> 
-                    </tr>
-                    <tr>
-                        <td>Set position</td>
-                        <td>
-                            <select id="position" class="form-control">
-                            <option value="bank">bank</option>
-                            <option value="A1">A1</option>
-                            <option value="A2">A2</option>
-                            <option value="A3">A3</option>
-                            <option value="A4">A4</option>
-                            <option value="A5">A5</option>
-                            <option value="B1">B1</option>
-                            <option value="B2">B2</option>
-                            <option value="B3">B3</option>
-                            <option value="B4">B4</option>
-                            <option value="B5">B5</option>
-                            <option value="C1">C1</option>
-                            <option value="C2">C2</option>
-                            <option value="C3">C3</option>
-                            <option value="C4">C4</option>
-                            <option value="C5">C5</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <textarea id="notes" class="form-control" placeholder="Notes, emails, reminders"></textarea>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div> 
-
-
-
-<!--         <input class="form-control input-lg" type="text" placeholder=".input-lg">
-<input class="form-control" type="text" placeholder="Default input">
-<input class="form-control input-sm" type="text" placeholder=".input-sm">
-
-<select class="form-control input-lg">...</select>
-<select class="form-control">...</select>
-<select class="form-control input-sm">...</select> -->
-
-
-
-
-<!--         <div class="app">
-            <h1>Phonegap</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div> -->
+                                Size
+                            </td>
+                            <td>
+                                <select class="form-control" id="size">
+                                <option value="small">Small</option>
+                                <option value="medium">Medium</option>
+                                <option value="large">Large</option>
+                                </select>
+                            </td> 
+                        </tr>
+                        <tr>
+                            <td>Color</td>
+                            <td>
+                                <select id="color" class="form-control">
+                                <option value="blue">blue</option>
+                                <option value="green">green</option>
+                                <option value="red">red</option>
+                                </select>
+                            </td> 
+                        </tr>
+                        <tr>
+                            <td>Set position</td>
+                            <td>
+                                <select id="position" class="form-control">
+                                <option value="bank">bank</option>
+                                <option value="A1">A1</option>
+                                <option value="A2">A2</option>
+                                <option value="A3">A3</option>
+                                <option value="A4">A4</option>
+                                <option value="A5">A5</option>
+                                <option value="B1">B1</option>
+                                <option value="B2">B2</option>
+                                <option value="B3">B3</option>
+                                <option value="B4">B4</option>
+                                <option value="B5">B5</option>
+                                <option value="C1">C1</option>
+                                <option value="C2">C2</option>
+                                <option value="C3">C3</option>
+                                <option value="C4">C4</option>
+                                <option value="C5">C5</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <textarea id="notes" class="form-control" placeholder="Notes, emails, reminders"></textarea>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> 
         </div>
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript">
-            app.initialize();
-        </script>
+        
+<!--             ending the new_page stuff^
+ -->
+
+        </div>
+
+        <div id="menuPage">
+            <div class "container-fluid">        
+                <div id="upperDiv" class="row">
+                  <div class="col-xs-3 text-left topButtons" onClick="backToGrid()">back</div>
+                  <div class="col-xs-6 text-center pageTitle">Menu</div>
+     
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>      
+            <br>
+            <br>
+            <br>         
+            <div class='container fontRegular'>
+                <table class = "table table-hover">
+ 
+                    <tbody>
+                        <tr id="btnToNewPage" class="active">
+                            <td>Make new Object</td>
+                            <td class="text-right">></td>
+                        </tr>
+                        <tr id="btnToOpen" class = "active">
+                            <td>Open project</td>
+                            <td class="text-right">></td>
+                        </tr>
+                        <tr id="btnToSave" class = "active">
+                            <td>Save</td>
+                            <td class="text-right">></td>
+                        </tr>
+                        <tr id="btnToList" class = "active">
+                            <td>List placed objects</td>
+                            <td class="text-right">></td>
+                        </tr>
+                        <tr id"btnToFB" class = "active">
+                            <td>Send us your feedback</td>
+                            <td class="text-right">></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> 
+
+
+
+    <!--         <input class="form-control input-lg" type="text" placeholder=".input-lg">
+    <input class="form-control" type="text" placeholder="Default input">
+    <input class="form-control input-sm" type="text" placeholder=".input-sm">
+
+    <select class="form-control input-lg">...</select>
+    <select class="form-control">...</select>
+    <select class="form-control input-sm">...</select> -->
+
+
+
+
+    <!--         <div class="app">
+                <h1>Phonegap</h1>
+                <div id="deviceready" class="blink">
+                    <p class="event listening">Connecting to Device</p>
+                    <p class="event received">Device is Ready</p>
+                </div> -->
+            </div>
+        </div>
+
+
+
+
+
+
+
+            <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+            <!-- Include all compiled plugins (below), or include individual files as needed -->
+            <script src="js/bootstrap.min.js"></script>
+            <script type="text/javascript" src="cordova.js"></script>
+            <script type="text/javascript" src="js/index.js"></script>
+            <script type="text/javascript">
+                app.initialize();
+            </script>
     </body>
 </html>
 

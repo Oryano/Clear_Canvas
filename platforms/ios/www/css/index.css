@@ -50,9 +50,14 @@ body {
 
 .topButtons{
     margin-top:15px;
-    margin-bottom: 7px;    
+    margin-bottom: 7px; 
+    padding-right: 25px; 
+    padding-left: 25px;  
     font-size: 16px;
     color: #FF8686;
+}
+.fontRegular{
+    font-size: 14px;
 }
 
 #upperDiv{
