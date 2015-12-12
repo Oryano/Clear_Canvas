@@ -120,12 +120,6 @@ var addNewObj = function(){
 
 }
 
-//below function not complete:
-//needs to send back to grid page with no addition
-// var cancelNew = function(){
-    
-//     console.log("send back to grid page");
-// }
 
 ///////////////////////////////////////////////////////////////
 //////      until here JS that belongs to new_object      /////
