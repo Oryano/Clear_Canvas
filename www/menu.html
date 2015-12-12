@@ -38,36 +38,24 @@
     <body>
 
         <div id="main_page">
-             <div class "container-fluid">        
-                <div id="upperDiv" class="row">
-                  <div class="col-xs-3 text-left topButtons" onClick="backToGrid()">All</div>
-                  <div class="col-xs-6 text-center pageTitle">[Project name]</div>
-                  <div class="col-xs-3 text-right topButtons" onclick="goToMenu()">Menu</div>
-                </div>
+            <h1>This is main grid page</h1>
 
+            <table id="gridd" class="" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;">
 
-                <div>
+          <tbody>
 
-                    <table id="gridd" class="table table-striped table-bordered table-condensed" style="">
-
-                      <tbody>
-
-                      </tbody>
-                    </table>
-
-
-
-                </div>
-                </div>
-            </div>
+          </tbody>
+          </table>
+        
         </div>
+
             
 <!--             starting the new page stuff:
  -->
 <div id = "new_page">
     <div class "container-fluid">        
                 <div id="upperDiv" class="row">
-                  <div class="col-xs-3 text-left topButtons" onClick="backToGrid()">Cancel</div>
+                  <div class="col-xs-3 text-left topButtons" onClick="cancelNew()">Cancel</div>
                   <div class="col-xs-6 text-center pageTitle">New Object</div>
                   <div class="col-xs-3 text-right topButtons"onClick="addNewObj()">Add</div>
                 </div>
@@ -168,7 +156,7 @@
         <div id="menuPage">
             <div class "container-fluid">        
                 <div id="upperDiv" class="row">
-                  <div class="col-xs-3 text-left topButtons" onClick="backToGrid()">Back</div>
+                  <div class="col-xs-3 text-left topButtons" onClick="backToGrid()"><</div>
                   <div class="col-xs-6 text-center pageTitle">Menu</div>
      
                 </div>
@@ -207,6 +195,25 @@
                 </table>
             </div> 
 
+
+
+    <!--         <input class="form-control input-lg" type="text" placeholder=".input-lg">
+    <input class="form-control" type="text" placeholder="Default input">
+    <input class="form-control input-sm" type="text" placeholder=".input-sm">
+
+    <select class="form-control input-lg">...</select>
+    <select class="form-control">...</select>
+    <select class="form-control input-sm">...</select> -->
+
+
+
+
+    <!--         <div class="app">
+                <h1>Phonegap</h1>
+                <div id="deviceready" class="blink">
+                    <p class="event listening">Connecting to Device</p>
+                    <p class="event received">Device is Ready</p>
+                </div> -->
             </div>
         </div>
 
