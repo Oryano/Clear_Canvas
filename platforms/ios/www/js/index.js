@@ -48,29 +48,36 @@ var app = {
     }
 };
 
+
+
+
+///////////////////////////////////////////////////////////////
+//////      from here JS that belongs to new_object       /////
+///////////////////////////////////////////////////////////////
+
 //a list to hold all obkecs (global)
 var items = [];
 
 
-
-
-
-
     //when readAll btn clicked - alt tag populate with json
     var readBtn = document.getElementById('readBtn');
-    readBtn.addEventListener('click', function() {
-        var currentOBJ = {};
-        currentOBJ.name = document.getElementById('name').value;
-        currentOBJ.size = document.getElementById('size').value;
-        currentOBJ.shape = document.getElementById('shape').value;
-        currentOBJ.color = document.getElementById('color').value;
-        currentOBJ.position = document.getElementById('position').value;
-        currentOBJ.notes = document.getElementById('notes').value;
-        currentJSON = JSON.stringify(currentOBJ).replace(/{|}|,/g,' '); //convert js-obj string
-        openReadInfo(currentJSON);
-        console.log(currentJSON);        
-    }, false);
+    if(readBtn == 0){
+        console.log('do nothing'); 
+    } else if (readBtn) {
+        readBtn.addEventListener('click', function() {
+            var currentOBJ = {};
+            currentOBJ.name = document.getElementById('name').value;
+            currentOBJ.size = document.getElementById('size').value;
+            currentOBJ.shape = document.getElementById('shape').value;
+            currentOBJ.color = document.getElementById('color').value;
+            currentOBJ.position = document.getElementById('position').value;
+            currentOBJ.notes = document.getElementById('notes').value;
+            currentJSON = JSON.stringify(currentOBJ).replace(/{|}|,/g,' '); //convert js-obj string
+            openReadInfo(currentJSON);
+            console.log(currentJSON);        
+        }, false);
 
+    };
 
 
 //fuction below:
@@ -87,21 +94,6 @@ function openReadInfo(currentJSON){ //func to show info on button for 3 sec then
     td.setAttribute("colspan", "2"); //occupy 2 <tr>
 
     document.getElementById('readRow').focus();
-
-    //document.getElementById("").focus();
-    //td.setAttribute("id", "readIt");
-
-    // $('#readIt').on("touchstart", function(){
-    //     $(this).remove();
-    //  });
-
-    // $('#readIt').trigger('touchstart');
-
-    //var touch = greg.createEvent('TouchEvent');
-    //touch.initTouchEvent();
-    //td.focus();
-    //info.focus();
-
 
 }
 
@@ -126,18 +118,77 @@ var addNewObj = function(){
     console.log(items);
 }
 
-//below function:
-//send to grid page with no addition
-var cancelNew = function(){
+//below function not complete:
+//needs to send back to grid page with no addition
+// var cancelNew = function(){
     
-    console.log("send back to grid page");
+//     console.log("send back to grid page");
+// }
+
+///////////////////////////////////////////////////////////////
+//////      until here JS that belongs to new_object      /////
+///////////////////////////////////////////////////////////////
+
+
+
+///////////////////////////////////////////////////////////////
+//////      from here JS that belongs to menu             /////
+///////////////////////////////////////////////////////////////
+
+//startuing with hiding the grid main page (and others)
+$(document).ready(function(){
+     $("#main_page").hide();
+     $("#new_page").hide();
+});
+
+
+//a function that replaces menu >> main_page
+var backToGrid = function(){
+    $("#menuPage").hide(); //hide menu
+    $("#main_page").show(); //show main page
+    $("#new_page").hide(); //hide menu
 }
 
+var goToMenu = function(){
+        console.log("walllla");
+    $("#new_age").hide(); //hide menu
+    $("#main_page").hide(); //show main page
+    $("#menuPage").show(); //hide menu
+}
+
+// to reveal new_object page when clicked (hide others)
+    var btnToNewPage = document.getElementById('btnToNewPage');
+    var new_page = document.getElementById('new_page');
+
+    btnToNewPage.addEventListener('click', function() {
+        console.log("user clicked the new proj button");
+        $('#new_page').show();
+        $("#menuPage").hide();
+    }, false);
+
+// to reveal open project page when clicked (hide others)
+    btnToOpen.addEventListener('click', function() {
+        console.log("user clicked the OPEN new button");
+     $("#main_page").hide();
+     $("#new_page").hide();
+     $("#menuPage").hide();
+     //$('#open_page').show(); doesnt exsist yet...
+    }, false);
+
+// to reveal open project page when clicked (hide others)
+    btnToSave.addEventListener('click', function() {
+        console.log("user clicked the SAVE new button");
+     $("#main_page").hide();
+     $("#new_page").hide();
+     $("#menuPage").hide();
+     //$('#open_page').show(); doesnt exsist yet...
+     //$('#save_page').show(); doesnt exsist yet...
+    }, false);
 
 
-
-
-
+///////////////////////////////////////////////////////////////
+//////      until here JS that belongs to menu            /////
+///////////////////////////////////////////////////////////////
 
 
 
