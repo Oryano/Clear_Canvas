@@ -116,6 +116,8 @@ var addNewObj = function(){
 
     items.push(currentJSON);
     console.log(items);
+    backToGrid();//go to grid page
+
 }
 
 //below function not complete:
@@ -150,7 +152,6 @@ var backToGrid = function(){
 }
 
 var goToMenu = function(){
-        console.log("walllla");
     $("#new_age").hide(); //hide menu
     $("#main_page").hide(); //show main page
     $("#menuPage").show(); //hide menu
