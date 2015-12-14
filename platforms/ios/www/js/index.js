@@ -55,7 +55,7 @@ var app = {
 //////      from here JS that belongs to new_object       /////
 ///////////////////////////////////////////////////////////////
 
-//a list to hold all obkecs (global)
+//a list to hold all objects (global)
 var items = [];
 
 
@@ -79,7 +79,24 @@ var items = [];
 
     };
 
+//create the grid
+function  doGrid(row, col){
+  //$('#setform').hide();
+  console.log("doing grid");
+  tbl = ""
+  // $(".grid").html(tbl); *** if the grid is made dynamically**
+  var rows = row,
+  cols = col;
 
+  for(var i = 0; i < rows; i++) {
+    $('#gridd').append('<tr></tr>');
+    for(var j = 0; j < cols; j++) {
+        $('#gridd').find('tr').eq(i).append('<td class=""><a class="tcell ui-link" role="button" onclick="gridMenu();" id='+j+","+i+'>'+j+','+i+'</a></td>');
+        $('table').find('tr').eq(i).find('td').eq(j).attr('data-row', i).attr('data-col', j);
+    }
+}
+
+}
 //fuction below:
 //shows summery of choices
 //gives it focus to voiceOver will read it
@@ -116,14 +133,10 @@ var addNewObj = function(){
 
     items.push(currentJSON);
     console.log(items);
+    backToGrid();//go to grid page
+
 }
 
-//below function not complete:
-//needs to send back to grid page with no addition
-// var cancelNew = function(){
-    
-//     console.log("send back to grid page");
-// }
 
 ///////////////////////////////////////////////////////////////
 //////      until here JS that belongs to new_object      /////
@@ -137,7 +150,9 @@ var addNewObj = function(){
 
 //startuing with hiding the grid main page (and others)
 $(document).ready(function(){
+    doGrid(17,14);
      $("#main_page").hide();
+
      $("#new_page").hide();
 });
 
@@ -146,14 +161,15 @@ $(document).ready(function(){
 var backToGrid = function(){
     $("#menuPage").hide(); //hide menu
     $("#main_page").show(); //show main page
+
     $("#new_page").hide(); //hide menu
 }
 
 var goToMenu = function(){
-        console.log("walllla");
     $("#new_age").hide(); //hide menu
     $("#main_page").hide(); //show main page
     $("#menuPage").show(); //hide menu
+
 }
 
 // to reveal new_object page when clicked (hide others)
@@ -190,6 +206,143 @@ var goToMenu = function(){
 //////      until here JS that belongs to menu            /////
 ///////////////////////////////////////////////////////////////
 
+/////////////////THE WOOOOOODS/////////////////////////////////
+function save() {
+    alert("saved!");
+    hide();
+    var elem = document.getElementById(globalFocus);
+    var x = document.getElementById("tableName").value;
+    var y = document.getElementById("guestName").value;
+    
+    nameLabel= x;
+    guestLabel= y;
+    
+    var table = new Table();
+    clear();
+    
+    elem.setAttribute("title", x);
+    elem.setAttribute("alt", y);
+    clear();
+}
+
+
+function Table(json) {
+    console.log("in table constructor");
+  
+  if ( elem == null ) {
+    
+    console.log(currentClass);
+    var elem = document.getElementById("overlay");
+    // var labe = document.getElementById("overlay");
+    elem.style.display = "inline";
+    
+    globalFocus = this.id;
+    console.log("GFE" + this.elem);
+    // CLASS SPECIFIC INITIALIZATION
+    this.class = currentClass;
+    this.id = "table" + tableCounter++;
+    // this.labe =$("");
+    this.elem = $("<div  alt='Table Object' id='" + this.id + "' class='" + this.class + "'><text style='font-size:10px;margin-top:15px'>drag me!</text><p id='" + this.id + "' class='" + this.class + " shapeText'> <b>Table: </b>"+ nameLabel +"<br><b>Guests:</b> </br>"+guestLabel+"</p></div>");
+    // this.labe =$("<p id='" + this.id + "' class='" + this.class + " shapeText'><b>Table: </b>"+ nameLabel +"<br><b>Guests:</b> </br>"+guestLabel+"</p>");
+    // this.elem = $("<div  alt='Table Object' id='" + this.id + "' class='" + this.class + "'><p id='dragText'>Drag me!</p></div>");
+    $(this.elem).bind("touchstart", this.start.bind(this));
+    //$(this.elem).bind("touchstart", this.Tone.startMobile.bind(this));
+    $(this.elem).bind("touchmove", this.moveMe.bind(this));
+    $(this.elem).bind("touchend", this.endCheck.bind(this));
+
+    // mouseDown, ousemove and mouseup to make work in browser****with bindings for tonejs above
+
+    // $(this.labe).bind("touchstart", this.start.bind(this));
+    // $(this.labe).bind("touchmove", this.moveMe.bind(this));
+    // $(this.labe).bind("touchend", this.endCheck.bind(this));
+
+
+    
+    // ADDED TO CHECK COLLISIONS
+    idArray.push(this.id);
+
+    // IF NOTHING EXISTS YET
+    
+
+    $("#mainDiagram").append(this.elem);
+    // $("#mainDiagram").append(this.labe);
+  }
+  else {
+    console.log("creating from elements", $(elem));
+    this.class = $(elem).attr("class");
+    this.id = $(elem).attr("id");
+    this.elem = $(elem);
+    // this.labe = $(labe);
+    this.name = name;
+    idArray.push(this.id);
+    tableCounter++;
+    //$(this.elem).bind("touchstart", this.Tone.startMobile.bind(this));
+    $(this.elem).bind("touchstart", this.start.bind(this));
+    $(this.elem).bind("touchmove", this.moveMe.bind(this));
+    $(this.elem).bind("touchend", this.endCheck.bind(this));
+    // $(this.labe).bind("touchstart", this.start.bind(this));
+    // $(this.labe).bind("touchmove", this.moveMe.bind(this));
+    // $(this.labe).bind("touchend", this.endCheck.bind(this));
+    this.endCheck();
+  }
+}
+
+
+
+//drag start
+Table.prototype.start = function(e) {
+    Tone.startMobile();
+    Tone.Transport.start();
+
+
+    
+
+       
+    
+    //synth.triggerAttack('F4');
+    console.log("I'm in start");
+
+    var orig = e.originalEvent;
+    var pos = $(this.elem).position();
+    // var pos2 = $(this.labe).position();
+    
+    this.elem.offset = {
+        x: orig.changedTouches[0].pageX - pos.left,
+        y: orig.changedTouches[0].pageY - pos.top
+    };
+
+
+    // this.labe.offset = {
+    //     x: orig.changedTouches[0].pageX - pos2.left,
+    //     y: orig.changedTouches[0].pageY - pos2.top
+    // };
+
+};
+
+//update css
+
+Table.prototype.moveMe = function(e) {
+    console.log("CURRENTclass " + currentClass);
+    e.preventDefault();
+    var orig = e.originalEvent;
+    $(this.elem).css({
+        top: orig.changedTouches[0].pageY - this.elem.offset.y,
+        left: orig.changedTouches[0].pageX - this.elem.offset.x
+
+    });
+      var incolumn = Math.floor((orig.changedTouches[0].pageX)/55);
+      var inrow = Math.floor((orig.changedTouches[0].pageY)/58)-2;
+      console.log(incolumn+ ","+inrow);
+     console.log(incolumn+ ","+inrow);
+
+      
+    // $(this.labe).css({
+    //     top: orig.changedTouches[0].pageY - this.labe.offset.y,
+    //     left: orig.changedTouches[0].pageX - this.labe.offset.x
+    // });
+
+
+};
 
 
 

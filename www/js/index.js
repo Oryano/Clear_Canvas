@@ -48,6 +48,31 @@ var app = {
     }
 };
 
+////////////////////////////////////////////////////////
+/////////       making a grid and a canvas         /////
+////////////////////////////////////////////////////////
+
+
+
+//create the grid
+function  doGrid(row, col){
+  //$('#setform').hide();
+  console.log("doing grid");
+  tbl = ""
+  // $(".grid").html(tbl); *** if the grid is made dynamically**
+  var rows = row,
+  cols = col;
+
+  for(var i = 0; i < rows; i++) {
+    $('#grid').append('<tr></tr>');
+    for(var j = 0; j < cols; j++) {
+        $('#grid').find('tr').eq(i).append('<td class=""><a class="tcell ui-link" role="button" onclick="gridMenu();" id='+j+","+i+'>'+j+','+i+'</a></td>');
+        $('table').find('tr').eq(i).find('td').eq(j).attr('data-row', i).attr('data-col', j);
+        }
+    }
+
+}
+
 
 
 
@@ -79,24 +104,7 @@ var items = [];
 
     };
 
-//create the grid
-function  doGrid(row, col){
-  //$('#setform').hide();
-  console.log("doing grid");
-  tbl = ""
-  // $(".grid").html(tbl); *** if the grid is made dynamically**
-  var rows = row,
-  cols = col;
 
-  for(var i = 0; i < rows; i++) {
-    $('#gridd').append('<tr></tr>');
-    for(var j = 0; j < cols; j++) {
-        $('#gridd').find('tr').eq(i).append('<td class=""><a class="tcell ui-link" role="button" onclick="gridMenu();" id='+j+","+i+'>'+j+','+i+'</a></td>');
-        $('table').find('tr').eq(i).find('td').eq(j).attr('data-row', i).attr('data-col', j);
-    }
-}
-
-}
 //fuction below:
 //shows summery of choices
 //gives it focus to voiceOver will read it
@@ -113,6 +121,7 @@ function openReadInfo(currentJSON){ //func to show info on button for 3 sec then
     document.getElementById('readRow').focus();
 
 }
+
 
 //below function:
 //make an OBJ by choices selected,
@@ -131,10 +140,22 @@ var addNewObj = function(){
     currentJSON = JSON.stringify(currentOBJ); //convert js-obj to json
     console.log(currentJSON);
 
-    items.push(currentJSON);
+    items.push(currentOBJ);
     console.log(items);
     backToGrid();//go to grid page
 
+    //----------------Drawing based on currend JSON----------------
+    function drawOBJ(currentOBJ){
+    
+        this.name = currentOBJ.name;
+        this.shape = currentOBJ.shape;
+        this.color = currentOBJ.color;
+        this.size = currentOBJ.size;
+        this.position = currentOBJ.position;
+        this.notes = currentOBJ.notes;
+
+
+    }
 }
 
 
@@ -150,9 +171,8 @@ var addNewObj = function(){
 
 //startuing with hiding the grid main page (and others)
 $(document).ready(function(){
-    doGrid(17,14);
+    doGrid(17,12);
      $("#main_page").hide();
-
      $("#new_page").hide();
 });
 
@@ -161,7 +181,6 @@ $(document).ready(function(){
 var backToGrid = function(){
     $("#menuPage").hide(); //hide menu
     $("#main_page").show(); //show main page
-
     $("#new_page").hide(); //hide menu
 }
 
@@ -185,20 +204,20 @@ var goToMenu = function(){
 // to reveal open project page when clicked (hide others)
     btnToOpen.addEventListener('click', function() {
         console.log("user clicked the OPEN new button");
-     $("#main_page").hide();
-     $("#new_page").hide();
-     $("#menuPage").hide();
-     //$('#open_page').show(); doesnt exsist yet...
+        $("#main_page").hide();
+        $("#new_page").hide();
+        $("#menuPage").hide();
+        //$('#open_page').show(); doesnt exsist yet...
     }, false);
 
 // to reveal open project page when clicked (hide others)
     btnToSave.addEventListener('click', function() {
         console.log("user clicked the SAVE new button");
-     $("#main_page").hide();
-     $("#new_page").hide();
-     $("#menuPage").hide();
-     //$('#open_page').show(); doesnt exsist yet...
-     //$('#save_page').show(); doesnt exsist yet...
+        $("#main_page").hide();
+        $("#new_page").hide();
+        $("#menuPage").hide();
+        //$('#open_page').show(); doesnt exsist yet...
+        //$('#save_page').show(); doesnt exsist yet...
     }, false);
 
 
@@ -206,14 +225,25 @@ var goToMenu = function(){
 //////      until here JS that belongs to menu            /////
 ///////////////////////////////////////////////////////////////
 
+
+
+
+
+
+
+
+
+
+
+
 /////////////////THE WOOOOOODS/////////////////////////////////
 function save() {
-    alert("saved!");
+    console.log("save !");
     hide();
     var elem = document.getElementById(globalFocus);
     var x = document.getElementById("tableName").value;
     var y = document.getElementById("guestName").value;
-    
+
     nameLabel= x;
     guestLabel= y;
     
@@ -226,7 +256,7 @@ function save() {
 }
 
 
-function Table(json) {
+function Table(elem) {
     console.log("in table constructor");
   
   if ( elem == null ) {
