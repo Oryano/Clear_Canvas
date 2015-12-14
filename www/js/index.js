@@ -52,27 +52,29 @@ var app = {
 /////////       making a grid and a canvas         /////
 ////////////////////////////////////////////////////////
 
+function setup(){
 
 
-//create the grid
-function  doGrid(row, col){
-  //$('#setform').hide();
-  console.log("doing grid");
-  tbl = ""
-  // $(".grid").html(tbl); *** if the grid is made dynamically**
-  var rows = row,
-  cols = col;
 
-  for(var i = 0; i < rows; i++) {
-    $('#grid').append('<tr></tr>');
-    for(var j = 0; j < cols; j++) {
-        $('#grid').find('tr').eq(i).append('<td class=""><a class="tcell ui-link" role="button" onclick="gridMenu();" id='+j+","+i+'>'+j+','+i+'</a></td>');
-        $('table').find('tr').eq(i).find('td').eq(j).attr('data-row', i).attr('data-col', j);
+    //create the grid
+    function  doGrid(row, col){
+      //$('#setform').hide();
+      console.log("doing grid");
+      tbl = ""
+      // $(".grid").html(tbl); *** if the grid is made dynamically**
+      var rows = row,
+      cols = col;
+
+      for(var i = 0; i < rows; i++) {
+        $('#grid').append('<tr></tr>');
+        for(var j = 0; j < cols; j++) {
+            $('#grid').find('tr').eq(i).append('<td class=""><a class="tcell ui-link" role="button" onclick="gridMenu();" id='+j+","+i+'>'+j+','+i+'</a></td>');
+            $('table').find('tr').eq(i).find('td').eq(j).attr('data-row', i).attr('data-col', j);
+            }
         }
+
     }
-
 }
-
 
 
 
