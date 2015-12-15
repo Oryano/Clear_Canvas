@@ -189,13 +189,13 @@ var addNewObj = function(){
             //color
             color = this.color;
             if (color == "red") {
-              fill(190, 15, 20);
+              fill(190, 15, 20, 10);
             }
             else if (color == "green") {
-              fill(10, 200, 30);
+              fill(10, 200, 30, 10);
             }
             else if (color == "blue") {
-              fill(10, 40, 170);
+              fill(10, 40, 170, 10);
             }
 
             //shape
