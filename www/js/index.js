@@ -171,18 +171,32 @@ var addNewObj = function(){
     var small = 50;
 
     
-
+//----------------Drawing based on currend JSON----------------
     currentOBJ.drawOBJ = function(){
-            //background(100,0);
             noStroke();
 
             //position
             position = this.position;
-            posArr = position.split(",");
-            posX = posArr[0];
-            posY = posArr[1];
-            posX = map(width, 0, width, 0, 12);
-            posY = map(height, 0, height, 0, 17);
+            if(position == "7,14"){
+                posX = 300;
+                posY = 465;
+            } else if(position == "1,9"){
+                posX = 65;
+                posY = 280;
+            } else if (position == "0,4"){
+                posX = 10;
+                posY = 125;
+            } else {
+                posX = 10;
+                posY = 10;
+            }
+
+
+            // posArr = position.split(",");
+            // posX = posArr[0];
+            // posY = posArr[1];
+            // posX = map(width, 0, width, 0, 12);
+            // posY = map(height, 0, height, 0, 17);
 
 
             //color
@@ -219,11 +233,6 @@ var addNewObj = function(){
             }
 
         }
-
-    
-
-//----------------Drawing based on currend JSON----------------
-
 }
 
 
@@ -289,6 +298,41 @@ var goToMenu = function(){
 //////      until here JS that belongs to menu            /////
 ///////////////////////////////////////////////////////////////
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //////from paul:
 // function Shape(elem){
 //     make a new div
@@ -302,7 +346,10 @@ var goToMenu = function(){
 
 
 
-/////////////////THE WOOOOOODS/////////////////////////////////
+
+
+
+///////////////////////THE WOOOOOODS/////////////////////////////////
 function save() {
     console.log("save !");
     hide();
