@@ -48,6 +48,46 @@ var app = {
     }
 };
 
+////////////////////////////////////////////////////////
+/////////       making a grid and a canvas         /////
+////////////////////////////////////////////////////////
+
+
+
+var canvas;
+
+function setup(){
+    
+    canvas = createCanvas(520, 590); //size of iPhone6
+    canvas.hide();
+    canvas.position(0,61); //start under top buttons
+    background(255,0); //draw background transparent
+}
+
+function draw(){ //drawing the objects
+    for (var i = 0; i < items.length; i++) {
+        items[i].drawOBJ();
+    };
+}
+
+
+    //create the grid
+    function  doGrid(row, col){
+      //$('#setform').hide();
+      console.log("doing grid");
+      tbl = ""
+      // $(".grid").html(tbl); *** if the grid is made dynamically**
+      var rows = row,
+      cols = col;
+
+      for(var i = 0; i < rows; i++) {
+        $('#grid').append('<tr></tr>');
+        for(var j = 0; j < cols; j++) {
+            $('#grid').find('tr').eq(i).append('<td class=""><a class="tcell ui-link" role="button" onclick="gridMenu();" id='+j+","+i+'>'+j+','+i+'</a></td>');
+            $('table').find('tr').eq(i).find('td').eq(j).attr('data-row', i).attr('data-col', j);
+        }
+    }
+}
 
 
 
@@ -79,24 +119,7 @@ var items = [];
 
     };
 
-//create the grid
-function  doGrid(row, col){
-  //$('#setform').hide();
-  console.log("doing grid");
-  tbl = ""
-  // $(".grid").html(tbl); *** if the grid is made dynamically**
-  var rows = row,
-  cols = col;
 
-  for(var i = 0; i < rows; i++) {
-    $('#gridd').append('<tr></tr>');
-    for(var j = 0; j < cols; j++) {
-        $('#gridd').find('tr').eq(i).append('<td class=""><a class="tcell ui-link" role="button" onclick="gridMenu();" id='+j+","+i+'>'+j+','+i+'</a></td>');
-        $('table').find('tr').eq(i).find('td').eq(j).attr('data-row', i).attr('data-col', j);
-    }
-}
-
-}
 //fuction below:
 //shows summery of choices
 //gives it focus to voiceOver will read it
@@ -114,12 +137,14 @@ function openReadInfo(currentJSON){ //func to show info on button for 3 sec then
 
 }
 
+
 //below function:
 //make an OBJ by choices selected,
 //add the OBJ to "items" list,
 //go to grid page (where u can see the OBJ)
-var addNewObj = function(){ 
-    
+var addNewObj = function(){
+
+    canvas.show();
     var currentOBJ = {};
     currentOBJ.name = document.getElementById('name').value;
     currentOBJ.size = document.getElementById('size').value;
@@ -129,19 +154,80 @@ var addNewObj = function(){
     currentOBJ.notes = document.getElementById('notes').value;
     
     currentJSON = JSON.stringify(currentOBJ); //convert js-obj to json
-    console.log(currentJSON);
+    //console.log(currentJSON);
 
-    items.push(currentJSON);
+    items.push(currentOBJ);
     console.log(items);
     backToGrid();//go to grid page
 
+    //vars for drawing:
+    var posArr;
+    var posX;
+    var posY;
+    var size;
+    var shape;
+    var color;
+    var small = 50; //smallest unit of shape
+    var width = 520; //based on iPhone6 screen
+    var height = 590; //based on iPhone6 screen
+
+    
+//----------------Drawing based on currend JSON----------------
+    currentOBJ.drawOBJ = function(){
+            noStroke(); 
+
+
+            //position
+            position = this.position;
+            posArr = position.split(",");
+            var x = posArr[0];
+            var y = posArr[1];
+            posX = map(x, 0, 12, 0, width);
+            posY = map(y, 0, 17, 0, height);
+            
+
+            //color
+            color = this.color;
+            if (color == "red") {
+              fill(190, 15, 20);
+            }
+            else if (color == "green") {
+              fill(10, 200, 30);
+            }
+            else if (color == "blue") {
+              fill(10, 40, 170);
+            }
+
+            //shape
+            shape = this.shape;
+            if (shape == "circle") {
+            ellipseMode(CORNER);
+            ellipse(posX, posY, size, size);
+            }
+            if (shape == "square") {
+            rect(posX, posY, size, size)
+            }
+
+            // //name OBJ
+            // name = this.name;
+            // push();
+            // //text(name, posX, posY);
+            // createP(name);
+            // pop();
+
+
+            //size
+            size = this.size;
+            if (size == "small") {
+            size = small;
+            } else if (size == "medium") {
+            size = small + 50
+            } else if (size == "large") {
+            size = small + 100
+            }
+
+        }
 }
-
-
-///////////////////////////////////////////////////////////////
-//////      until here JS that belongs to new_object      /////
-///////////////////////////////////////////////////////////////
-
 
 
 ///////////////////////////////////////////////////////////////
@@ -150,10 +236,9 @@ var addNewObj = function(){
 
 //startuing with hiding the grid main page (and others)
 $(document).ready(function(){
-    doGrid(17,14);
-     $("#main_page").hide();
-
-     $("#new_page").hide();
+    doGrid(17,12);
+    $("#main_page").hide();
+    $("#new_page").hide();
 });
 
 
@@ -161,14 +246,15 @@ $(document).ready(function(){
 var backToGrid = function(){
     $("#menuPage").hide(); //hide menu
     $("#main_page").show(); //show main page
-
     $("#new_page").hide(); //hide menu
+    canvas.show();
 }
 
 var goToMenu = function(){
     $("#new_age").hide(); //hide menu
     $("#main_page").hide(); //show main page
     $("#menuPage").show(); //hide menu
+    canvas.hide();
 
 }
 
@@ -185,20 +271,20 @@ var goToMenu = function(){
 // to reveal open project page when clicked (hide others)
     btnToOpen.addEventListener('click', function() {
         console.log("user clicked the OPEN new button");
-     $("#main_page").hide();
-     $("#new_page").hide();
-     $("#menuPage").hide();
-     //$('#open_page').show(); doesnt exsist yet...
+        $("#main_page").hide();
+        $("#new_page").hide();
+        $("#menuPage").hide();
+        //$('#open_page').show(); doesnt exsist yet...
     }, false);
 
 // to reveal open project page when clicked (hide others)
     btnToSave.addEventListener('click', function() {
         console.log("user clicked the SAVE new button");
-     $("#main_page").hide();
-     $("#new_page").hide();
-     $("#menuPage").hide();
-     //$('#open_page').show(); doesnt exsist yet...
-     //$('#save_page').show(); doesnt exsist yet...
+        $("#main_page").hide();
+        $("#new_page").hide();
+        $("#menuPage").hide();
+        //$('#open_page').show(); doesnt exsist yet...
+        //$('#save_page').show(); doesnt exsist yet...
     }, false);
 
 
@@ -206,32 +292,80 @@ var goToMenu = function(){
 //////      until here JS that belongs to menu            /////
 ///////////////////////////////////////////////////////////////
 
-/////////////////THE WOOOOOODS/////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//////from paul:
+// function Shape(elem){
+//     make a new div
+//     style the div to be the size of the settings in json
+
+//  $(this.elem).bind("touchstart", this.start.bind(this));
+//     //$(this.elem).bind("touchstart", this.Tone.startMobile.bind(this));
+//     $(this.elem).bind("touchmove", this.moveMe.bind(this));
+//     $(this.elem).bind("touchend", this.endCheck.bind(this));
+// }
+
+
+
+
+
+
+///////////////////////THE WOOOOOODS/////////////////////////////////
 function save() {
-    alert("saved!");
+    console.log("save !");
     hide();
     var elem = document.getElementById(globalFocus);
     var x = document.getElementById("tableName").value;
     var y = document.getElementById("guestName").value;
-    
+
     nameLabel= x;
     guestLabel= y;
     
     var table = new Table();
-    clear();
+    
     
     elem.setAttribute("title", x);
     elem.setAttribute("alt", y);
-    clear();
-}
+    
 
 
-function Table(json) {
-    console.log("in table constructor");
   
   if ( elem == null ) {
     
-    console.log(currentClass);
+    //console.log(currentClass);
     var elem = document.getElementById("overlay");
     // var labe = document.getElementById("overlay");
     elem.style.display = "inline";
@@ -239,7 +373,7 @@ function Table(json) {
     globalFocus = this.id;
     console.log("GFE" + this.elem);
     // CLASS SPECIFIC INITIALIZATION
-    this.class = currentClass;
+    //this.class = currentClass;
     this.id = "table" + tableCounter++;
     // this.labe =$("");
     this.elem = $("<div  alt='Table Object' id='" + this.id + "' class='" + this.class + "'><text style='font-size:10px;margin-top:15px'>drag me!</text><p id='" + this.id + "' class='" + this.class + " shapeText'> <b>Table: </b>"+ nameLabel +"<br><b>Guests:</b> </br>"+guestLabel+"</p></div>");
@@ -266,8 +400,7 @@ function Table(json) {
 
     $("#mainDiagram").append(this.elem);
     // $("#mainDiagram").append(this.labe);
-  }
-  else {
+  } else {
     console.log("creating from elements", $(elem));
     this.class = $(elem).attr("class");
     this.id = $(elem).attr("id");
@@ -285,20 +418,15 @@ function Table(json) {
     // $(this.labe).bind("touchend", this.endCheck.bind(this));
     this.endCheck();
   }
-}
 
+}
 
 
 //drag start
 Table.prototype.start = function(e) {
-    Tone.startMobile();
-    Tone.Transport.start();
+    // Tone.startMobile();
+    // Tone.Transport.start();
 
-
-    
-
-       
-    
     //synth.triggerAttack('F4');
     console.log("I'm in start");
 
@@ -321,8 +449,8 @@ Table.prototype.start = function(e) {
 
 //update css
 
-Table.prototype.moveMe = function(e) {
-    console.log("CURRENTclass " + currentClass);
+Shape.prototype.moveMe = function(e) {
+    
     e.preventDefault();
     var orig = e.originalEvent;
     $(this.elem).css({

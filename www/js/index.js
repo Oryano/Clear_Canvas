@@ -64,8 +64,7 @@ function setup(){
     background(255,0); //draw background transparent
 }
 
-function draw(){
-
+function draw(){ //drawing the objects
     for (var i = 0; i < items.length; i++) {
         items[i].drawOBJ();
     };
@@ -168,36 +167,24 @@ var addNewObj = function(){
     var size;
     var shape;
     var color;
-    var small = 50;
+    var small = 50; //smallest unit of shape
+    var width = 520; //based on iPhone6 screen
+    var height = 590; //based on iPhone6 screen
 
     
 //----------------Drawing based on currend JSON----------------
     currentOBJ.drawOBJ = function(){
-            noStroke();
+            noStroke(); 
+
 
             //position
             position = this.position;
-            if(position == "7,14"){
-                posX = 300;
-                posY = 465;
-            } else if(position == "1,9"){
-                posX = 65;
-                posY = 280;
-            } else if (position == "0,4"){
-                posX = 10;
-                posY = 125;
-            } else {
-                posX = 10;
-                posY = 10;
-            }
-
-
-            // posArr = position.split(",");
-            // posX = posArr[0];
-            // posY = posArr[1];
-            // posX = map(width, 0, width, 0, 12);
-            // posY = map(height, 0, height, 0, 17);
-
+            posArr = position.split(",");
+            var x = posArr[0];
+            var y = posArr[1];
+            posX = map(x, 0, 12, 0, width);
+            posY = map(y, 0, 17, 0, height);
+            
 
             //color
             color = this.color;
@@ -220,6 +207,13 @@ var addNewObj = function(){
             if (shape == "square") {
             rect(posX, posY, size, size)
             }
+
+            // //name OBJ
+            // name = this.name;
+            // push();
+            // //text(name, posX, posY);
+            // createP(name);
+            // pop();
 
 
             //size
