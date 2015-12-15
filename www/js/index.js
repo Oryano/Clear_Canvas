@@ -257,15 +257,8 @@ function save() {
     elem.setAttribute("title", x);
     elem.setAttribute("alt", y);
     
-}
 
 
-<<<<<<< HEAD
-function Table(elem) {
-=======
-function Table() {
->>>>>>> 08dca55ac4b9b30ab928cf3a255c9cc1ff3ceccb
-    console.log("in table constructor");
   
   if ( elem == null ) {
     
@@ -304,8 +297,7 @@ function Table() {
 
     $("#mainDiagram").append(this.elem);
     // $("#mainDiagram").append(this.labe);
-  }
-  else {
+  } else {
     console.log("creating from elements", $(elem));
     this.class = $(elem).attr("class");
     this.id = $(elem).attr("id");
@@ -323,12 +315,12 @@ function Table() {
     // $(this.labe).bind("touchend", this.endCheck.bind(this));
     this.endCheck();
   }
+
 }
 
 
-
 //drag start
-Shape.prototype.start = function(e) {
+Table.prototype.start = function(e) {
     // Tone.startMobile();
     // Tone.Transport.start();
 
