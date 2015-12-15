@@ -52,8 +52,24 @@ var app = {
 /////////       making a grid and a canvas         /////
 ////////////////////////////////////////////////////////
 
-function setup(){
 
+
+var canvas;
+
+function setup(){
+    
+    canvas = createCanvas(520, 590); //size of iPhone6
+    canvas.hide();
+    canvas.position(0,61); //start under top buttons
+    background(255,0); //draw background transparent
+}
+
+function draw(){
+
+    for (var i = 0; i < items.length; i++) {
+        items[i].drawOBJ();
+    };
+}
 
 
     //create the grid
@@ -70,9 +86,7 @@ function setup(){
         for(var j = 0; j < cols; j++) {
             $('#grid').find('tr').eq(i).append('<td class=""><a class="tcell ui-link" role="button" onclick="gridMenu();" id='+j+","+i+'>'+j+','+i+'</a></td>');
             $('table').find('tr').eq(i).find('td').eq(j).attr('data-row', i).attr('data-col', j);
-            }
         }
-
     }
 }
 
@@ -129,8 +143,9 @@ function openReadInfo(currentJSON){ //func to show info on button for 3 sec then
 //make an OBJ by choices selected,
 //add the OBJ to "items" list,
 //go to grid page (where u can see the OBJ)
-var addNewObj = function(){ 
-    
+var addNewObj = function(){
+
+    canvas.show();
     var currentOBJ = {};
     currentOBJ.name = document.getElementById('name').value;
     currentOBJ.size = document.getElementById('size').value;
@@ -140,31 +155,76 @@ var addNewObj = function(){
     currentOBJ.notes = document.getElementById('notes').value;
     
     currentJSON = JSON.stringify(currentOBJ); //convert js-obj to json
-    console.log(currentJSON);
+    //console.log(currentJSON);
 
     items.push(currentOBJ);
     console.log(items);
     backToGrid();//go to grid page
 
-    //----------------Drawing based on currend JSON----------------
-    function drawOBJ(currentOBJ){
+    //vars for drawing:
+    var posArr;
+    var posX;
+    var posY;
+    var size;
+    var shape;
+    var color;
+    var small = 50;
+
     
-        this.name = currentOBJ.name;
-        this.shape = currentOBJ.shape;
-        this.color = currentOBJ.color;
-        this.size = currentOBJ.size;
-        this.position = currentOBJ.position;
-        this.notes = currentOBJ.notes;
+
+    currentOBJ.drawOBJ = function(){
+            //background(100,0);
+            noStroke();
+
+            //position
+            position = this.position;
+            posArr = position.split(",");
+            posX = posArr[0];
+            posY = posArr[1];
+            posX = map(width, 0, width, 0, 12);
+            posY = map(height, 0, height, 0, 17);
 
 
-    }
+            //color
+            color = this.color;
+            if (color == "red") {
+              fill(190, 15, 20);
+            }
+            else if (color == "green") {
+              fill(10, 200, 30);
+            }
+            else if (color == "blue") {
+              fill(10, 40, 170);
+            }
+
+            //shape
+            shape = this.shape;
+            if (shape == "circle") {
+            ellipseMode(CORNER);
+            ellipse(posX, posY, size, size);
+            }
+            if (shape == "square") {
+            rect(posX, posY, size, size)
+            }
+
+
+            //size
+            size = this.size;
+            if (size == "small") {
+            size = small;
+            } else if (size == "medium") {
+            size = small + 50
+            } else if (size == "large") {
+            size = small + 100
+            }
+
+        }
+
+    
+
+//----------------Drawing based on currend JSON----------------
+
 }
-
-
-///////////////////////////////////////////////////////////////
-//////      until here JS that belongs to new_object      /////
-///////////////////////////////////////////////////////////////
-
 
 
 ///////////////////////////////////////////////////////////////
@@ -174,8 +234,8 @@ var addNewObj = function(){
 //startuing with hiding the grid main page (and others)
 $(document).ready(function(){
     doGrid(17,12);
-     $("#main_page").hide();
-     $("#new_page").hide();
+    $("#main_page").hide();
+    $("#new_page").hide();
 });
 
 
@@ -184,12 +244,14 @@ var backToGrid = function(){
     $("#menuPage").hide(); //hide menu
     $("#main_page").show(); //show main page
     $("#new_page").hide(); //hide menu
+    canvas.show();
 }
 
 var goToMenu = function(){
     $("#new_age").hide(); //hide menu
     $("#main_page").hide(); //show main page
     $("#menuPage").show(); //hide menu
+    canvas.hide();
 
 }
 
