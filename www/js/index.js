@@ -227,14 +227,16 @@ var goToMenu = function(){
 //////      until here JS that belongs to menu            /////
 ///////////////////////////////////////////////////////////////
 
+//////from paul:
+// function Shape(elem){
+//     make a new div
+//     style the div to be the size of the settings in json
 
-
-
-
-
-
-
-
+//  $(this.elem).bind("touchstart", this.start.bind(this));
+//     //$(this.elem).bind("touchstart", this.Tone.startMobile.bind(this));
+//     $(this.elem).bind("touchmove", this.moveMe.bind(this));
+//     $(this.elem).bind("touchend", this.endCheck.bind(this));
+// }
 
 
 
@@ -250,20 +252,24 @@ function save() {
     guestLabel= y;
     
     var table = new Table();
-    clear();
+    
     
     elem.setAttribute("title", x);
     elem.setAttribute("alt", y);
-    clear();
+    
 }
 
 
+<<<<<<< HEAD
 function Table(elem) {
+=======
+function Table() {
+>>>>>>> 08dca55ac4b9b30ab928cf3a255c9cc1ff3ceccb
     console.log("in table constructor");
   
   if ( elem == null ) {
     
-    console.log(currentClass);
+    //console.log(currentClass);
     var elem = document.getElementById("overlay");
     // var labe = document.getElementById("overlay");
     elem.style.display = "inline";
@@ -271,7 +277,7 @@ function Table(elem) {
     globalFocus = this.id;
     console.log("GFE" + this.elem);
     // CLASS SPECIFIC INITIALIZATION
-    this.class = currentClass;
+    //this.class = currentClass;
     this.id = "table" + tableCounter++;
     // this.labe =$("");
     this.elem = $("<div  alt='Table Object' id='" + this.id + "' class='" + this.class + "'><text style='font-size:10px;margin-top:15px'>drag me!</text><p id='" + this.id + "' class='" + this.class + " shapeText'> <b>Table: </b>"+ nameLabel +"<br><b>Guests:</b> </br>"+guestLabel+"</p></div>");
@@ -322,15 +328,10 @@ function Table(elem) {
 
 
 //drag start
-Table.prototype.start = function(e) {
-    Tone.startMobile();
-    Tone.Transport.start();
+Shape.prototype.start = function(e) {
+    // Tone.startMobile();
+    // Tone.Transport.start();
 
-
-    
-
-       
-    
     //synth.triggerAttack('F4');
     console.log("I'm in start");
 
@@ -353,8 +354,8 @@ Table.prototype.start = function(e) {
 
 //update css
 
-Table.prototype.moveMe = function(e) {
-    console.log("CURRENTclass " + currentClass);
+Shape.prototype.moveMe = function(e) {
+    
     e.preventDefault();
     var orig = e.originalEvent;
     $(this.elem).css({
